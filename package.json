@@ -1,0 +1,20 @@
+{
+  "name": "instagram-unliker",
+  "version": "1.0.0",
+  "description": "Unlike some photos that you don't want to be liked anymore",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "instagram",
+    "unliker",
+    "instagram-unliker"
+  ],
+  "author": "Rayyan Ansari",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "instagram-private-api": "^1.45.1"
+  }
+}
