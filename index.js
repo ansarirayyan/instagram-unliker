@@ -33,39 +33,13 @@ ig.state.generateDevice(process.env.IG_USERNAME);
 	console.log("can this be printed?"+loggedInUser.pk);
 
   const discoverFeed = ig.feed.discover(loggedInUser.pk);
-  //const discoverFirstPage = discoverFeed.items();
-//	console.log(type(discoverFeed)); // type is not defined
-		// wonder if I got to do that request stuff as seen in account-followers.feed.example.ts 
-//	console.log(type(discoverFirstPage));
-	//
-	const wholeResponse = await discoverFeed.request(); // is this like, all of it? isn't that a lot in a lot of cases lol?
 
-	console.log(wholeResponse); // this was a very underwhelming response lol but ok
 
 	const items = await discoverFeed.items();
   console.log(items); // Here you can reach items. It's array.
-	// this is the gold right here I think; realized that afer a whole bunch of stuff down there lol
-	console.log("THIS IS ITEMS RIGHT?"); // Al Hamdu Lillah yes indeed
-
-//  const thirdPageItems = await discoverFeed.items();
-  // Feed is stateful and auto-paginated. Every subsequent request returns results from next page
-//  console.log("thirdPageItems: " + thirdPageItems); // Here you can reach items. It's array.
-//  const feedState = discoverFeed.serialize(); // You can serialize feed state to have an ability to continue get next pages.
-	// not really understanding this serialize stuff but I think this explains why const is named thirdPageItems
-//  console.log("feedState: " + feedState);
-//  console.log("feedState type: " + typeof(feedState)); // OH SERIALIZATIN FROM C++; just makes it into text
-//  discoverFeed.deserialize(feedState);
-  const fourthPageItems = await discoverFeed.items();
-  console.log("fourthPageItems: " + fourthPageItems);
 
 
-/*
-  for (const  of types) {  
-  console.log(`A JavaScript type is: ${type}`)
-} https://futurestud.io/tutorials/node-js-for-of-vs-for-in-loops */
-
-  // userInputtedString = "atef" guess my homie wasn't on the front page is that what u call it lol
-  userInputtedString = "natgeo"
+  userInputtedString = "kooltool123"
   i = 0
   while (i < items.length) {
 	  // this should be only 4 spaces but whatever
