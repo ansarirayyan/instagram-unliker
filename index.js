@@ -59,8 +59,36 @@ ig.state.generateDevice(process.env.IG_USERNAME);
   console.log("fourthPageItems: " + fourthPageItems);
 
 
+/*
+  for (const  of types) {  
+  console.log(`A JavaScript type is: ${type}`)
+} https://futurestud.io/tutorials/node-js-for-of-vs-for-in-loops */
 
+  // userInputtedString = "atef" guess my homie wasn't on the front page is that what u call it lol
+  userInputtedString = "natgeo"
+  i = 0
+  while (i < items.length) {
+	  // this should be only 4 spaces but whatever
+	  // remwmber, items.length is always one more than max index value of array/ls
+	  // i forget what are the differences between array and list again lol
+	  
+	  if (items[i].user.username.includes(userInputtedString)) {
+		  console.log("Is this what you asked for, mate? " + items[i].user.username);
+		  // always gotta type in items[0].user.username; aybe shud make some var
+		  // idk if items[0].user.username.includes(userInputtedString) will work or not
+		  // maybe it will, but maybe sometime sit won't in pure JS on web browsers so that y they always make us reassign vars or something idk
 
-  console.log("LOOK HERE => " + items[0].user.username); // WEEEEEEEEEEEEEEEEEEEEEEE ALHAMDULLILLAH IMMA PUSH TO A DIFF BRANCH MAYBE IDK
+		  console.log("Really? This is what you requested: " + userInputtedString);
+		  // prolly a good idea to put this here
+		  // hald-screen with ... whatever
+	  } else {
+		console.log("What's up doc?");
+	  }
+
+	  i = i + 1;
+  }
+  
+
+	console.log("LOOK HERE => " + items[0].user.username); // WEEEEEEEEEEEEEEEEEEEEEEE ALHAMDULLILLAH IMMA PUSH TO A DIFF BRANCH MAYBE IDK
 
 })();
