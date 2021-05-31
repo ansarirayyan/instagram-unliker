@@ -47,52 +47,20 @@ ig.state.generateDevice(process.env.IG_USERNAME);
 	// this is the gold right here I think; realized that afer a whole bunch of stuff down there lol
 	console.log("THIS IS ITEMS RIGHT?"); // Al Hamdu Lillah yes indeed
 
-  const thirdPageItems = await discoverFeed.items();
+//  const thirdPageItems = await discoverFeed.items();
   // Feed is stateful and auto-paginated. Every subsequent request returns results from next page
-  console.log("thirdPageItems: " + thirdPageItems); // Here you can reach items. It's array.
-  const feedState = discoverFeed.serialize(); // You can serialize feed state to have an ability to continue get next pages.
+//  console.log("thirdPageItems: " + thirdPageItems); // Here you can reach items. It's array.
+//  const feedState = discoverFeed.serialize(); // You can serialize feed state to have an ability to continue get next pages.
 	// not really understanding this serialize stuff but I think this explains why const is named thirdPageItems
-  console.log("feedState: " + feedState);
-  console.log("feedState type: " + typeof(feedState)); // OH SERIALIZATIN FROM C++; just makes it into text
-  discoverFeed.deserialize(feedState);
+//  console.log("feedState: " + feedState);
+//  console.log("feedState type: " + typeof(feedState)); // OH SERIALIZATIN FROM C++; just makes it into text
+//  discoverFeed.deserialize(feedState);
   const fourthPageItems = await discoverFeed.items();
   console.log("fourthPageItems: " + fourthPageItems);
 
-//console.log("will this be an array/list?" + typeof(feedState.nextMaxId)); // undefined
-
-  console.log("wonder how this will look liek I started to write this in camel case lol: " + discoverFeed);
-//  await ig.media.like(discoverFeed.nextMaxId[0]); // need the deserialzed one 
-	//  above line: "YALNISH, COK YALNISH" -- Fehim Pasha ik i spelled wrong
-//	console.debug("ISSUE US HERE RIGHT"); // yani, before; yeha it is 
-  //console.log("wonder how this will look liek I started to write this in camel case lol: " + discoverFeed);
 
 
-//console.log(items[0]);
-  console.log("LOOK HERE =>" + items[0].user.username); // WEEEEEEEEEEEEEEEEEEEEEEE ALHAMDULLILLAH IMMA PUSH TO A DIFF BRANCH MAYBE IDK
 
-	//  console.log("TYPE OF fourthPageItems: " + typeof(fourthPageItems)); // it's an object
-	/* From Oracle Docs:
-	 * Real-world objects share two characteristics: 
-	 * They all have state and behavior. 
-	 * Dogs have state (name, color, breed, hungry) and behavior (barking, fetching, wagging tail). 
-	 * Bicycles also have state 
-	 * (current gear, current pedal cadence, current speed) and behavior (changing gear, changing pedal cadence, applying brakes)
-	 */
-	// just for the record, which this will be recorded most likely if I end up pusing to repo, that was a reminder
-//  await ig.media.like(fourthPageItems);
+  console.log("LOOK HERE => " + items[0].user.username); // WEEEEEEEEEEEEEEEEEEEEEEE ALHAMDULLILLAH IMMA PUSH TO A DIFF BRANCH MAYBE IDK
 
-
-//await ig.media.like(discoverFirstPage[0].id);
-  // All the feeds are auto-paginated, so you just need to call .items() sequentially to get next page
-/*  const myPostsSecondPage = await userFeed.items();
-  await ig.media.like({
-    // Like our first post from first page or first post from second page randomly
-    mediaId: sample([myPostsFirstPage[0].id, myPostsSecondPage[0].id]),
-    moduleInfo: {
-      module_name: 'profile',
-      user_id: loggedInUser.pk,
-      username: loggedInUser.username,
-    },
-    d: sample([0, 1]),
-  }); */
 })();
