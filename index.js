@@ -31,10 +31,10 @@ ig.state.generateDevice(process.env.IG_USERNAME);
   // i don't think these are actual osts but people recommended to you lol
 	// I could add a whole menu option thing but maybe later lol
 
-const discoverFeed = ig.feed.liked(loggedInUser.pk);
+const likedFeed = ig.feed.liked(loggedInUser.pk);
 	// Alhamdulillah I think I did it time to push lol
 
-	const items = await discoverFeed.items();
+	const items = await likedFeed.items();
   console.log(items); // Here you can reach items. It's array.
 
 
@@ -55,6 +55,7 @@ const discoverFeed = ig.feed.liked(loggedInUser.pk);
 	  // i forget what are the differences between array and list again lol
 	 
           username = items[i].user.username;
+	  postId = items[i].id
 
 	  if (username.includes(userInputtedString)) {
 		  console.log("Is this what you asked for, mate? " + username);
@@ -63,6 +64,16 @@ const discoverFeed = ig.feed.liked(loggedInUser.pk);
 		  // maybe it will, but maybe sometime sit won't in pure JS on web browsers so that y they always make us reassign vars or something idk
 
 		 // console.log("Really? This is what you requested: " + userInputtedString);
+		 console.log(":::::::LOOK HERE: " + postId);
+		  //ig.media.unlike(postId);
+		  await ig.media.like({
+    mediaId: postId,
+    moduleInfo: {
+      module_name: 'profile',
+      user_id: loggedInUser.pk,
+      username: loggedInUser.username,
+    },
+  });
 	  } else {
 //		console.log("What's up doc?");
 		console.log("This one didn't make the cut: " + username );
