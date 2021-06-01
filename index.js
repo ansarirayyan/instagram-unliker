@@ -1,3 +1,9 @@
+/* const readline = require("readline");
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+}); */
+const prompts = require('prompts');
 require('dotenv').config()
 const { IgApiClient } = require('./node_modules/instagram-private-api/dist');
 const { sample } = require('lodash');
@@ -38,8 +44,51 @@ ig.state.generateDevice(process.env.IG_USERNAME);
 	const items = await discoverFeed.items();
   console.log(items); // Here you can reach items. It's array.
 
+// ok so that diary entyr (lol) I wrote below was befor eme writing thisadsadsad
+	//
+	//
+	/* rl.question("Why are you rinning?? ", function(name) {
+    rl.question("Where do you live ? ", function(country) {
+        console.log(`${name}, is a citizen of ${country}`);
+        rl.close();
+    });
+}); yeha idk*/
 
-  userInputtedString = "kooltool123"
+/*	prompt.start();
+
+prompt.get(['theUserMyGuyLookinFo', 'email'], function (err, result) {
+    if (err) { return onErr(err); }
+    console.log('Command-line input received:');
+    console.log('  Username: ' + result.theUserMyGuyLookinFo);
+    console.log('  Why are you running? Cuz email??: ' + result.email);
+});
+
+function onErr(err) {
+    console.log(err);
+    return 1;
+ } */
+
+//(async () => {
+  const response = await prompts({
+    type: 'text',
+    name: 'desiredUsernameToSearchFor',
+    message: 'Which dude you wanna filter for?: ',
+  });
+
+  console.log(response.desiredUsernameToSerarchFor); // => { value: 24 } from ex code
+	// should name be capitalized (first leter) in camel case?
+// })();
+
+	userInputtedString = response.desiredUsernameToSearchFor;
+
+  //userInputtedString = "kooltool123" // so apparently this is one of my homie's homies
+	// a homie of my homie is my homie and my homie's In sha Allahs become Al Hamdu Lillahs
+	// was thinking of doing this whole angular web interface at firs but idk too much 
+	// work and idk if it goes against me and my guy raja weise's agreement this kind 
+	// of already goes against it but I don't think he would mind anyways found this
+	// thing called readline on stack overflow what a long comment lemme add some
+	// newlines up there or left there I guess idk man
+	// something nice is that u can use mouse cursor thing weeeeee
   i = 0
   while (i < items.length) {
 	  // this should be only 4 spaces but whatever
@@ -63,6 +112,6 @@ ig.state.generateDevice(process.env.IG_USERNAME);
   }
   
 
-	console.log("LOOK HERE => " + items[0].user.username); // WEEEEEEEEEEEEEEEEEEEEEEE ALHAMDULLILLAH IMMA PUSH TO A DIFF BRANCH MAYBE IDK
+//	console.log("LOOK HERE => " + items[0].user.username); // WEEEEEEEEEEEEEEEEEEEEEEE ALHAMDULLILLAH IMMA PUSH TO A DIFF BRANCH MAYBE IDK
 
 })();

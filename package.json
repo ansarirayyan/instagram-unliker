@@ -15,6 +15,11 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
-    "instagram-private-api": "^1.45.1"
+    "instagram-private-api": "^1.45.1",
+    "prompt": "^1.1.0",
+    "prompts": "^2.4.1",
+    "semver": "^7.3.5",
+    "stack": "^0.1.0",
+    "subset": "^1.1.0"
   }
 }
