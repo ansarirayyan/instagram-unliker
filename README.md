@@ -1,6 +1,7 @@
-Hi
+# Directions
 
-Make sure to run `npm install` cuz node_modules might not have everything
+1. Clone the repository (or download the zip or whatever)
 
-Yours Truly,
-Rayyan
+2. Make sure that the working directory is of this project. Then run `npm install`.
+
+3. Now run `node index.js` and fill out what it says on there
