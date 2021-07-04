@@ -4,7 +4,6 @@ const { IgApiClient, IgLoginTwoFactorRequiredError } = require('instagram-privat
 const { sample } = require('lodash');
 const Bluebird = require('bluebird');
 const inquirer = require('inquirer');
-const twoFA = require('./2fa');
 
 const ig = new IgApiClient();
 
@@ -54,28 +53,22 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
   //const userFeed = ig.feed.user(loggedInUser.pk);
   //const myPostsFirstPage = await userFeed.items(); // OH THIS VAR NAME LOL THIS IS FOR MY POSTS MY OWN LOL AND IS UNDEFINED
 
-
-  const likedFeed = ig.feed.liked(loggedInUser.pk);
-	// Alhamdulillah I think I did it time to push lol
-
-  var items = await likedFeed.items();
-  // console.log(items); // Here you can reach items. It's array.
-
-
-  var response = await prompts({
+  var theUserInput = await prompts({
     type: 'text',
     name: 'desiredUsernameToSearchFor',
     message: 'Which dude you wanna filter for?: ',
   });
 
-  console.log(response.desiredUsernameToSerarchFor);
+	userInputtedString = theUserInput.desiredUsernameToSearchFor;
 
-	userInputtedString = response.desiredUsernameToSearchFor;
+  const likedFeed = ig.feed.liked(loggedInUser.pk);
+  var items = await likedFeed.items();
+    // Here you can reach items. It's array.
 
   i = 0
   while (i < items.length) {
 
-          username = items[i].user.username;
+    username = items[i].user.username;
 	  postId = items[i].id
 
 	  if (username.includes(userInputtedString)) {
