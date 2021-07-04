@@ -4,6 +4,7 @@ const { IgApiClient, IgLoginTwoFactorRequiredError } = require('instagram-privat
 const { sample } = require('lodash');
 const Bluebird = require('bluebird');
 const inquirer = require('inquirer');
+const sleep = require('sleep');
 
 const ig = new IgApiClient();
 
@@ -61,6 +62,8 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
 
 	userInputtedString = theUserInput.desiredUsernameToSearchFor;
 
+  while (true) {
+  try {
   const likedFeed = ig.feed.liked(loggedInUser.pk);
   var items = await likedFeed.items();
     // Here you can reach items. It's array.
@@ -91,5 +94,14 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
 	  }
 
 	  i = i + 1;
+  } //sleep.sleep(sample([5, 6, 7])); // not sure if to put here or in other while loop
+      /* I think her eis fine because no requests made inside the whole loop unless
+       * it's a match but that's kind of leaving it to chance but whatever */
+    var numberOfTimeOfSleep = sample([5, 6, 7]);
+    console.log("SLEEPING FOR THIS LONG: " + numberOfTimeOfSleep);
+    sleep.sleep(numberOfTimeOfSleep);
+  } catch (e) {console.log("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);
+      // I guess only ne '%s' needed here
+    break;}
   }
 })();
