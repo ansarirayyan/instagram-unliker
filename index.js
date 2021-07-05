@@ -54,19 +54,53 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
   //const userFeed = ig.feed.user(loggedInUser.pk);
   //const myPostsFirstPage = await userFeed.items(); // OH THIS VAR NAME LOL THIS IS FOR MY POSTS MY OWN LOL AND IS UNDEFINED
 
-  var theUserInput = await prompts({
-    type: 'text',
-    name: 'desiredUsernameToSearchFor',
-    message: 'Which dude you wanna filter for?: ',
-  });
+  const questions = [
+    {
+      type: 'text',
+      name: 'username',
+      message: 'Which user do you wanna filter for?',
+    },
+    {
+      type: 'number',
+      name: 'index',
+      message: 'What\'s the index that you stopped at? (default: 0)',
+      initial: 0
+    }
+  ];
 
-	userInputtedString = theUserInput.desiredUsernameToSearchFor;
+	const userResponse = await prompts(questions);
+  const usernameToSearchFor = userResponse.username;
+  const indexAtWhichUserStoppedAt = userResponse.index;
 
-  while (true) {
-  try {
+  var counter = 0;
   const likedFeed = ig.feed.liked(loggedInUser.pk);
   var items = await likedFeed.items();
+  while (true) {
+    //const likedFeed = ig.feed.liked(loggedInUser.pk);
+  //var items0 = await likedFeed.items();
     // Here you can reach items. It's array.
+  //var items = await likedFeed.items();
+    /*var items = [];
+    var index = (indexAtWhichUserStoppedAt + 1);
+
+    try {
+      int iI = 0;
+      while (iI < i) {
+        
+        iI++;
+      }
+    } catch (e) {
+      console.log("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);
+        // I guess only one '%s' needed here
+      break;
+    } */
+
+  var iI = 1;
+  //var items; // actually maybe this will work
+  while (iI < counter) {
+    items = await likedFeed.items();
+    iI++;
+  } // not sure if this while-loop stuff will work
 
   i = 0
   while (i < items.length) {
@@ -74,7 +108,7 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
     username = items[i].user.username;
 	  postId = items[i].id
 
-	  if (username.includes(userInputtedString)) {
+	  if (username.includes(usernameToSearchFor)) {
 		  console.log("Is this what you asked for, mate? " + username);
 
 		  console.log(":::::::LOOK HERE: " + postId);
@@ -100,8 +134,9 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
     var numberOfTimeOfSleep = sample([5, 6, 7]);
     console.log("SLEEPING FOR THIS LONG: " + numberOfTimeOfSleep);
     sleep.sleep(numberOfTimeOfSleep);
-  } catch (e) {console.log("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);
+  //} catch (e) {console.log("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);
       // I guess only ne '%s' needed here
-    break;}
+  //  break;}
+  counter++;
   }
 })();
