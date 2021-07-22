@@ -64,7 +64,7 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
       type: 'number',
       name: 'index',
       message: 'What\'s the index that you stopped at? (default: 0)',
-      initial: 0
+      initial: 1
     }
   ];
 
@@ -72,70 +72,50 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
   const usernameToSearchFor = userResponse.username;
   const indexAtWhichUserStoppedAt = userResponse.index;
 
-  var counter = 1;
+ // var counter = 1;
+  var counter = userResponse.index;
   const likedFeed = ig.feed.liked(loggedInUser.pk);
   var items = await likedFeed.items();
-  while (true) {
-    //const likedFeed = ig.feed.liked(loggedInUser.pk);
-  //var items0 = await likedFeed.items();
-    // Here you can reach items. It's array.
-  //var items = await likedFeed.items();
-    /*var items = [];
-    var index = (indexAtWhichUserStoppedAt + 1);
 
-    try {
-      int iI = 0;
-      while (iI < i) {
+  try {
+
+    while (true) {
+
+      var iI = 1;
+      while (iI < counter) {
+        items = await likedFeed.items();
         iI++;
       }
-    } catch (e) {
-      console.log("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);
-        // I guess only one '%s' needed here
-      break;
-    } */
 
-  var iI = 1;
-  //var items; // actually maybe this will work
-  while (iI < counter) {
-    items = await likedFeed.items();
-    iI++;
-  } // not sure if this while-loop stuff will work
+      i = 0
+      while (i < items.length) {
+        username = items[i].user.username;
+        postId = items[i].id
 
-  i = 0
-  while (i < items.length) {
+        if (username.includes(usernameToSearchFor)) {
+          console.log("Is this what you asked for, mate? " + username);
 
-    username = items[i].user.username;
-	  postId = items[i].id
+          console.log(":::::::LOOK HERE: " + postId);
+          //ig.media.unlike(postId);
+          const likeResult = await ig.media.unlike({
+            mediaId: postId,
+            moduleInfo: {
+              module_name: 'profile',
+              user_id: loggedInUser.pk,
+              username: loggedInUser.username,
+            },
+            d: 1,
+          });
+          console.log(likeResult);
+        } else {
+          console.log("This one didn't make the cut: " + username );
+        }
 
-	  if (username.includes(usernameToSearchFor)) {
-		  console.log("Is this what you asked for, mate? " + username);
-
-		  console.log(":::::::LOOK HERE: " + postId);
-		  //ig.media.unlike(postId);
-		  const likeResult = await ig.media.unlike({
-        mediaId: postId,
-        moduleInfo: {
-          module_name: 'profile',
-          user_id: loggedInUser.pk,
-          username: loggedInUser.username,
-        },
-        d: 1,
-      });
-      console.log(likeResult);
-	  } else {
-		  console.log("This one didn't make the cut: " + username );
-	  }
-
-	  i = i + 1;
-  } //sleep.sleep(sample([5, 6, 7])); // not sure if to put here or in other while loop
-      /* I think her eis fine because no requests made inside the whole loop unless
-       * it's a match but that's kind of leaving it to chance but whatever */
-    var numberOfTimeOfSleep = sample([5, 6, 7]);
-    console.log("SLEEPING FOR THIS LONG: " + numberOfTimeOfSleep);
-    sleep.sleep(numberOfTimeOfSleep);
-  //} catch (e) {console.log("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);
-      // I guess only ne '%s' needed here
-  //  break;}
-  counter++;
-  }
+        i = i + 1;
+      }     var numberOfTimeOfSleep = sample([5, 6, 7]);
+      console.log("SLEEPING FOR THIS LONG: " + numberOfTimeOfSleep);
+      sleep.sleep(numberOfTimeOfSleep);
+      counter++;
+    }
+  } catch (e) {console.debug("\x1b[41m%s\x1b[0m", "THERE WAS AN ERROR: " + e);}
 })();
