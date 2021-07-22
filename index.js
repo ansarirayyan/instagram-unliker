@@ -72,7 +72,7 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
   const usernameToSearchFor = userResponse.username;
   const indexAtWhichUserStoppedAt = userResponse.index;
 
-  var counter = 0;
+  var counter = 1;
   const likedFeed = ig.feed.liked(loggedInUser.pk);
   var items = await likedFeed.items();
   while (true) {
@@ -86,7 +86,6 @@ process.nextTick(async () => await ig.simulate.postLoginFlow());
     try {
       int iI = 0;
       while (iI < i) {
-        
         iI++;
       }
     } catch (e) {
